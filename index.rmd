@@ -1,0 +1,92 @@
+---
+title: "Developing Data Products Week 3: R Markdown and Plotly"
+author: "xbuRAw (GH)"
+date: "December 29, 2019"
+geometry: margin=2cm
+output: ioslides_presentation
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = TRUE, echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+## 0. Introduction
+In this small project we will try out different plots that the `plotly` library has to offer.
+We will utilize `plotly` to produce:
+
+1. a simple line plot 
+2. a histogram
+3. a boxplot
+4. a multidimensional 2D plot
+
+```{r}
+library(plotly)
+```
+data sets being used:
+
+```{r}
+data(presidents)
+data(sunspot.year)
+data(mtcars)
+```
+
+## 1.1 Line plot 
+A simple line plot of the quarterly approval ratings of US presidents.
+
+```{r eval = FALSE}
+plot_ly(data = as.data.frame(presidents), x = ~time(presidents),
+  y = ~presidents, type = "scatter", mode = "lines") %>%
+  layout(title = "Quarterly approval ratings over the years")
+```
+##
+```{r echo = FALSE}
+plot_ly(data = as.data.frame(presidents), x = ~time(presidents), y = ~presidents, type = "scatter", mode = "lines") %>%
+  layout(title = "Quarterly approval ratings over the years")
+```
+
+## 1.2 Histogram
+A histogram of monthly sunspots numbers (1749-1983).
+
+```{r eval = FALSE}
+p <- plot_ly(data = as.data.frame(sunspot.year), x = ~sunspot.year,
+  type = "histogram") %>%
+  layout(title = "Sunspot occurrences histogram",
+    yaxis = list(title = "count"))
+p
+```
+##
+```{r echo = FALSE}
+p <- plot_ly(data = as.data.frame(sunspot.year), x = ~sunspot.year, type = "histogram") %>%
+  layout(title = "Sunspot occurrences histogram", yaxis = list(title = "count"))
+p
+```
+
+## 1.3 Box plot
+A boxplot visualizing the horsepower by cylinder relationship in the mtcars data set.
+
+```{r eval = FALSE}
+plot_ly(mtcars, x=~cyl, y = ~hp,
+  color = ~as.factor(cyl), type = "box") %>%
+  layout(title = "Box plot cyl~hp")
+```
+##
+```{r echo = FALSE}
+plot_ly(mtcars, x=~cyl, y = ~hp, color = ~as.factor(cyl), type = "box") %>%
+  layout(title = "Box plot cyl~hp")
+```
+
+## 1.4 Multi dimensional plot
+A 2D plot visualizing 4 dimensions of the mtcars data set (x-axis, y-axis, color and size of data point).
+
+```{r eval = FALSE}
+plot_ly(data = mtcars, x = ~wt, y = ~mpg, 
+  color = ~as.factor(cyl), size = ~hp,
+  type = "scatter", mode = "markers") %>%
+  layout(title = "Car properties visualized")
+```
+##
+```{r echo = FALSE}
+plot_ly(data = mtcars, x = ~wt, y = ~mpg, 
+  color = ~as.factor(cyl), size = ~hp,
+  type = "scatter", mode = "markers") %>%
+  layout(title = "Car properties visualized")
+```
