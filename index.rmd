@@ -16,7 +16,7 @@ We will utilize `plotly` to produce:
 1. a simple line plot 
 2. a histogram
 3. a boxplot
-4. a multidimensional 2D plot
+4. a multidimensional plot in 2D
 
 ```{r}
 library(plotly)
@@ -75,7 +75,7 @@ plot_ly(mtcars, x=~cyl, y = ~hp, color = ~as.factor(cyl), type = "box") %>%
 ```
 
 ## 1.4 Multi dimensional plot
-A 2D plot visualizing 4 dimensions of the mtcars data set (x-axis, y-axis, color and size of data point).
+A 2D plot visualizing 4 dimensions of the mtcars data set (x-axis (weight), y-axis (miles per galon), color (cylinder) and size (horse power) of data point).
 
 ```{r eval = FALSE}
 plot_ly(data = mtcars, x = ~wt, y = ~mpg, 
